@@ -6,7 +6,10 @@ from rest_framework_simplejwt.views import (
     TokenBlacklistView
 )
 
-from .views import UserRegisterAPIView
+from .views import (
+    UserRegisterAPIView,
+
+)
 
 
 app_name = 'account'
