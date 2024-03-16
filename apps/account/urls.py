@@ -21,5 +21,4 @@ urlpatterns = [
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_refresh'),
     path('api/token/black/list/', TokenBlacklistView.as_view(), name='black_list'),
     path('api/user/register/', UserRegisterAPIView.as_view(), name='register_user'),
-
 ]
