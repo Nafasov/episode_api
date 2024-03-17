@@ -15,3 +15,4 @@ def send_mail_reset_password(self, user, *args, **kwargs):
               fail_silently=True
               )
     return f"Send mail successfully"
+
