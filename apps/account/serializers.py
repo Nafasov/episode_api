@@ -39,13 +39,13 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'email', 'first_name', 'last_name',  'avatar', 'last_login', 'modified_date', 'created_date']
 
 
-class ResetPasswordSerializer(serializers.Serializer):
+class ResetPasswordSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email']
 
 
-class SetNewPasswordSerializer(serializers.Serializer):
+class SetNewPasswordSerializer(serializers.ModelSerializer):
     password1 = serializers.CharField(min_length=8, write_only=True)
     password2 = serializers.CharField(min_length=8, write_only=True)
     uidb64 = serializers.CharField(max_length=64, required=True)

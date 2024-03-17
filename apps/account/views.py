@@ -2,6 +2,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils.encoding import  smart_str
 from django.utils.http import urlsafe_base64_decode
 from rest_framework import generics
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .tasks import send_mail_reset_password
@@ -37,8 +38,12 @@ class ResetPasswordAPIView(generics.GenericAPIView):
     queryset = User.objects.all()
 
     def post(self, request, *args, **kwargs):
-        user = User.objects.get(email=request.data["email"])
-        send_mail_reset_password().delay(user)
+        print(request.data)
+        email = request.data.get("email")
+        print(email)
+        user_id = get_object_or_404(User, email=email).id
+        print(user_id)
+        send_mail_reset_password.apply_async((user_id, ))
         ctx = {
             'success': True,
             'message': 'Send email has been reset'
@@ -47,6 +52,7 @@ class ResetPasswordAPIView(generics.GenericAPIView):
 
 
 class PasswordTokenCheckAPIView(generics.GenericAPIView):
+    serializer_class = SetNewPasswordSerializer
 
     def get(self, request, uidb64, token, *args, **kwargs):
         try:
