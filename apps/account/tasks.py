@@ -16,7 +16,8 @@ def send_mail_reset_password(user_id, *args, **kwargs):
     token = PasswordResetTokenGenerator().make_token(user)
     current_site = os.getenv('current_site')
     protocol = os.getenv('protocol')
-    abs_url = f'{protocol}://{current_site}/account/api/user/password-token{uidb64}/{token}'
+    a = f'{uidb64}/{token}/'
+    abs_url = f"{protocol}://{current_site}/account/api/user/password-token/" + a
     subject = 'Hi! Episode'
     message = f'Reset Password link:\n\n{abs_url}'
     send_mail(subject=subject,
@@ -25,5 +26,5 @@ def send_mail_reset_password(user_id, *args, **kwargs):
               recipient_list=[user.email],
               fail_silently=True
               )
-    return f"Send mail successfully"
+    return f"Send email successfully"
 

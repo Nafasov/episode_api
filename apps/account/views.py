@@ -38,11 +38,8 @@ class ResetPasswordAPIView(generics.GenericAPIView):
     queryset = User.objects.all()
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
         email = request.data.get("email")
-        print(email)
         user_id = get_object_or_404(User, email=email).id
-        print(user_id)
         send_mail_reset_password.apply_async((user_id, ))
         ctx = {
             'success': True,
@@ -75,7 +72,7 @@ class SetPasswordAPIView(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        return Response({'success': True, 'message': 'Successfully Password Changed'})
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'success': True, 'message': 'Successfully Password Changed'})
 

@@ -66,7 +66,7 @@ class SetNewPasswordSerializer(serializers.ModelSerializer):
             raise AuthenticationFailed({'success': False, 'message': 'The reset link is invalid.'})
         if password1 != password2:
             return ValidationError({'success': False, 'message': 'Passwords do not match.'})
-        return user
+        return attrs
 
     def create(self, validated_data):
         password1 = validated_data.pop('password1')
