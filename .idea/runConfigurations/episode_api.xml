@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Unnamed" type="Python.DjangoServer" factoryName="Django server" nameIsGenerated="true">
+  <configuration default="false" name="episode_api" type="Python.DjangoServer" factoryName="Django server">
     <module name="episode_api" />
     <option name="ENV_FILES" value="" />
     <option name="INTERPRETER_OPTIONS" value="" />
