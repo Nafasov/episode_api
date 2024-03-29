@@ -24,12 +24,12 @@ class TagSerializer(serializers.ModelSerializer):
 
 class EpisodeSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
-    tag = TagSerializer(read_only=True)
+    tags = TagSerializer(read_only=True, many=True)
     author = UserSerializer(read_only=True)
 
     class Meta:
         model = Episode
-        fields = ['id', 'title', 'slug', 'category', 'tag', 'author', 'image', 'music', 'description', 'created_date']
+        fields = ['id', 'title', 'slug', 'category', 'tags', 'author', 'image', 'music', 'description', 'created_date']
 
 
 class EpisodePOSTSerializer(serializers.ModelSerializer):
@@ -57,3 +57,11 @@ class EpisodeCommentSerializer(serializers.ModelSerializer):
         validated_data['author_id'] = author_id
         validated_data['episode_id'] = episode_id
         return super().create(validated_data)
+
+
+class EpisodeLikeSerializer(serializers.Serializer):
+    episode_id = serializers.IntegerField()
+    user_id = serializers.IntegerField()
+
+    class Meta:
+        fields = ['episode_id', 'user_id']
