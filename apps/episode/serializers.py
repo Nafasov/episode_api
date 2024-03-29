@@ -47,12 +47,12 @@ class EpisodePOSTSerializer(serializers.ModelSerializer):
 class EpisodeCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = EpisodeComment
-        fields = ['id', 'comment', 'parent', 'top_level_comment_id', 'created_date']
+        fields = ['id', 'comment', 'parent', 'top_level_comment_id']
         red_only_fields = ['top_level_comment_id']
 
     def create(self, validated_data):
         request = self.context['request']
-        episode_id = validated_data['episode_id']
+        episode_id = self.context['episode_id']
         author_id = request.user.id
         validated_data['author_id'] = author_id
         validated_data['episode_id'] = episode_id

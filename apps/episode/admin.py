@@ -1,8 +1,17 @@
 from django.contrib import admin
 
-# Register your models here.
 
-from .models import Episode, EpisodeComment, EpisodeLike
+from .models import Episode, EpisodeComment, EpisodeLike, Category, Tag
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title')
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title')
 
 
 @admin.register(Episode)
