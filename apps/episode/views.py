@@ -1,6 +1,7 @@
+from django_filters import rest_framework
 from rest_framework import viewsets, generics
 from rest_framework.response import Response
-
+from rest_framework import filters
 from .serializers import (
     TagSerializer,
     CategorySerializer,
@@ -18,6 +19,7 @@ from .models import (
 )
 
 from .permission import IsAuthorOrReadOnly
+from .filters import EpisodeFilter
 
 
 class CategoryAPIView(generics.ListAPIView):
@@ -37,6 +39,9 @@ class EpisodeAPIView(viewsets.ModelViewSet):
     serializer_class = EpisodeSerializer
     serializer_post_class = EpisodePOSTSerializer
     permission_classes = [IsAuthorOrReadOnly]
+    filterset_class = EpisodeFilter
+    filter_backends = [rest_framework.DjangoFilterBackend, filters.SearchFilter]
+    search_fields = ['title', 'description']
 
     def get_serializer_class(self):
         super().get_serializer_class()
