@@ -1,5 +1,4 @@
-from rest_framework import viewsets, generics, permissions
-from rest_framework.pagination import PageNumberPagination
+from rest_framework import viewsets, generics
 from rest_framework.response import Response
 
 from .serializers import (
