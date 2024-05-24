@@ -60,8 +60,12 @@ class EpisodeCommentSerializer(serializers.ModelSerializer):
 
 
 class EpisodeLikeSerializer(serializers.Serializer):
-    episode_id = serializers.IntegerField()
-    user_id = serializers.IntegerField()
-
-    class Meta:
-        fields = ['episode_id', 'user_id']
+    pass
+    # def create(self, validated_data):
+    #     request = self.context['request']
+    #     episode_id = self.context['episode_id']
+    #     user_id = request.user.id
+    #     validated_data['episode_id'] = episode_id
+    #     validated_data['user_id'] = user_id
+    #     super().create(**validated_data)
+    #     return validated_data

@@ -28,6 +28,4 @@ urlpatterns = [
     path('api/user/reset-password/', ResetPasswordAPIView.as_view(), name='reset_password'),
     path('api/user/password-token/<str:uidb64>/<str:token>/', PasswordTokenCheckAPIView.as_view(), name='check_password'),
     path('api/user/set-password/', SetPasswordAPIView.as_view(), name='set_password')
-
-
 ]

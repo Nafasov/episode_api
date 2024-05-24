@@ -185,6 +185,9 @@ SWAGGER_SETTINGS = {
 }
 
 
+# Django project settings.py
+
+
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
